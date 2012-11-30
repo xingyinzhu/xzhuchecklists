@@ -18,6 +18,8 @@
 		BE3C65401665DF3400284CA3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE3C653F1665DF3400284CA3 /* Default-568h@2x.png */; };
 		BE3C65431665DF3400284CA3 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE3C65411665DF3400284CA3 /* MainStoryboard.storyboard */; };
 		BE3C65461665DF3400284CA3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3C65451665DF3400284CA3 /* ViewController.m */; };
+		BE3C654E1666125F00284CA3 /* ChecklistItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3C654D1666125F00284CA3 /* ChecklistItem.m */; };
+		BE3C655116662CFD00284CA3 /* ItemDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3C655016662CFD00284CA3 /* ItemDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +39,10 @@
 		BE3C65421665DF3400284CA3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		BE3C65441665DF3400284CA3 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		BE3C65451665DF3400284CA3 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		BE3C654C1666125F00284CA3 /* ChecklistItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChecklistItem.h; sourceTree = "<group>"; };
+		BE3C654D1666125F00284CA3 /* ChecklistItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChecklistItem.m; sourceTree = "<group>"; };
+		BE3C654F16662CFD00284CA3 /* ItemDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemDetailViewController.h; sourceTree = "<group>"; };
+		BE3C655016662CFD00284CA3 /* ItemDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +94,10 @@
 				BE3C65411665DF3400284CA3 /* MainStoryboard.storyboard */,
 				BE3C65441665DF3400284CA3 /* ViewController.h */,
 				BE3C65451665DF3400284CA3 /* ViewController.m */,
+				BE3C654F16662CFD00284CA3 /* ItemDetailViewController.h */,
+				BE3C655016662CFD00284CA3 /* ItemDetailViewController.m */,
+				BE3C654C1666125F00284CA3 /* ChecklistItem.h */,
+				BE3C654D1666125F00284CA3 /* ChecklistItem.m */,
 				BE3C65301665DF3400284CA3 /* Supporting Files */,
 			);
 			path = XYZCheckList;
@@ -176,6 +186,8 @@
 				BE3C65361665DF3400284CA3 /* main.m in Sources */,
 				BE3C653A1665DF3400284CA3 /* AppDelegate.m in Sources */,
 				BE3C65461665DF3400284CA3 /* ViewController.m in Sources */,
+				BE3C654E1666125F00284CA3 /* ChecklistItem.m in Sources */,
+				BE3C655116662CFD00284CA3 /* ItemDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +304,7 @@
 				BE3C654B1665DF3400284CA3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
