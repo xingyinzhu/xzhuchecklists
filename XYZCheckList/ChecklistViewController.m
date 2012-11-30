@@ -6,18 +6,21 @@
 //  Copyright (c) 2012年 Xingyin Zhu. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "ChecklistViewController.h"
 #import "ChecklistItem.h"
+#import "Checklist.h"
 
 //test xyzhu
-@interface ViewController ()
+@interface ChecklistViewController ()
 
 @end
 
-@implementation ViewController
+@implementation ChecklistViewController
 {
     NSMutableArray *items;
 }
+
+@synthesize checklist;
 
 - (NSString *)documentsDirectory
 {
@@ -71,7 +74,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.title = self.checklist.name;
 }
 
 - (void)didReceiveMemoryWarning
