@@ -23,6 +23,7 @@
 		BE8949D51668DDBE00B81361 /* AllListsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8949D41668DDBE00B81361 /* AllListsViewController.m */; };
 		BE8949D91668E3A100B81361 /* Checklist.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8949D81668E3A100B81361 /* Checklist.m */; };
 		BE8949DC1668E8AB00B81361 /* ListDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8949DB1668E8AB00B81361 /* ListDetailViewController.m */; };
+		BEF03FAC166A05080030C87D /* DataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF03FAB166A05080030C87D /* DataModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,8 @@
 		BE8949D81668E3A100B81361 /* Checklist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Checklist.m; sourceTree = "<group>"; };
 		BE8949DA1668E8AB00B81361 /* ListDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListDetailViewController.h; sourceTree = "<group>"; };
 		BE8949DB1668E8AB00B81361 /* ListDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListDetailViewController.m; sourceTree = "<group>"; };
+		BEF03FAA166A05080030C87D /* DataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataModel.h; sourceTree = "<group>"; };
+		BEF03FAB166A05080030C87D /* DataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +116,8 @@
 				BE8949DB1668E8AB00B81361 /* ListDetailViewController.m */,
 				BE8949D71668E3A100B81361 /* Checklist.h */,
 				BE8949D81668E3A100B81361 /* Checklist.m */,
+				BEF03FAA166A05080030C87D /* DataModel.h */,
+				BEF03FAB166A05080030C87D /* DataModel.m */,
 				BE3C65301665DF3400284CA3 /* Supporting Files */,
 			);
 			path = XYZCheckList;
@@ -206,6 +211,7 @@
 				BE8949D51668DDBE00B81361 /* AllListsViewController.m in Sources */,
 				BE8949D91668E3A100B81361 /* Checklist.m in Sources */,
 				BE8949DC1668E8AB00B81361 /* ListDetailViewController.m in Sources */,
+				BEF03FAC166A05080030C87D /* DataModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

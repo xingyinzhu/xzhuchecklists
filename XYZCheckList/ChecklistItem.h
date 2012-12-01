@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ChecklistItem : NSObject <NSCoding>
+@interface ChecklistItem : NSObject
 
 @property (nonatomic, copy) NSString *text;
 @property (nonatomic, assign) BOOL checked;
