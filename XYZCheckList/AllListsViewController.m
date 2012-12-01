@@ -30,6 +30,30 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self.tableView reloadData];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    self.navigationController.delegate = self;
+    
+    //int index = [[NSUserDefaults standardUserDefaults] integerForKey:@"ChecklistIndex"];
+    int index = [self.dataModel indexOfSelectedChecklist];
+    
+    //if (index !=-1)
+    if (index >= 0 && index < [self.dataModel.lists count])
+    {
+        Checklist *checklist = [self.dataModel.lists objectAtIndex:index];
+        [self performSegueWithIdentifier:@"ShowChecklist" sender:checklist];
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -47,8 +71,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -62,12 +84,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
     Checklist *checklist = [self.dataModel.lists objectAtIndex:indexPath.row];
@@ -75,6 +96,21 @@
     cell.textLabel.text = checklist.name;
     cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     
+    int count = [checklist countUncheckedItems];
+    if ([checklist.items count] == 0)
+    {
+        cell.detailTextLabel.text = @"(No Items)";
+    }
+    else if (count == 0)
+    {
+        cell.detailTextLabel.text = @"All Done!";
+    }
+    else
+    {
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%d Remaining", [checklist countUncheckedItems]];
+    }
+    
+    cell.imageView.image = [UIImage imageNamed:checklist.iconName];
     return cell;
     
 }
@@ -122,36 +158,30 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    //[[NSUserDefaults standardUserDefaults] setInteger:indexPath.row forKey:@"ChecklistIndex"];
+    [self.dataModel setIndexOfSelectedChecklist:indexPath.row];
+    
     Checklist *checklist = [self.dataModel.lists objectAtIndex:indexPath.row];
     [self performSegueWithIdentifier:@"ShowChecklist" sender:checklist];
 }
 
 - (void)listdetailViewController:(ListDetailViewController *)controller didFinishAddingChecklist:(Checklist *)checklist
 {
-    
-    //NSLog(@"i am here haha");
-    int newRowIndex = [self.dataModel.lists count];
-    //NSLog(@"i am here 0");
     [self.dataModel.lists addObject:checklist];
-    
-    //NSLog(@"i am here 1");
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:newRowIndex inSection:0];
-    //NSLog(@"i am here 2");
-    NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
-    //NSLog(@"i am here 3");
-    [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-    //NSLog(@"i am here 4");
+    //[self.dataModel sortChecklists];
+    [self.dataModel sortChecklists];
+    //[self.dataModel printhaha];
+    [self.tableView reloadData];
+
     [self dismissViewControllerAnimated:YES completion:nil];
-    //sNSLog(@"i am here ");
+
 
 }
 
 - (void)listdetailViewController:(ListDetailViewController *)controller didFinishEditingChecklist:(Checklist *)checklist
 {
-    int index = [self.dataModel.lists indexOfObject:checklist];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    cell.textLabel.text = checklist.name;
+    [self.dataModel sortChecklists];
+    [self.tableView reloadData];
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -178,6 +208,16 @@
     Checklist *checklist = [self.dataModel.lists objectAtIndex:indexPath.row];
     controller.checklistToEdit = checklist;
     [self presentViewController:navigationController animated:YES completion:nil];
+}
+
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    if (viewController == self)
+    {
+        //[[NSUserDefaults standardUserDefaults] setInteger:-1 forKey:@"ChecklistIndex"];
+        [self.dataModel setIndexOfSelectedChecklist:-1];
+    }
+
 }
 
 @end

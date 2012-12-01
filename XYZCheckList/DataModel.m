@@ -7,10 +7,26 @@
 //
 
 #import "DataModel.h"
+#import "Checklist.h"
 
 @implementation DataModel
 
 @synthesize lists;
+
+- (void)handleFirstTime
+{
+    BOOL firstTime = [[NSUserDefaults standardUserDefaults] boolForKey:@"FirstTime"];
+    //printf("haha");
+    if (firstTime)
+    {
+        //printf("hehe");
+        Checklist *checklist = [[Checklist alloc] init];
+        checklist.name = @"List";
+        [self.lists addObject:checklist];
+        [self setIndexOfSelectedChecklist:0];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"FirstTime"];
+    }
+}
 
 
 - (id)init
@@ -18,6 +34,8 @@
     if ((self = [super init]))
     {
         [self loadChecklists];
+        [self registerDefaults];
+        [self handleFirstTime];
     }
     return self;
 }
@@ -62,8 +80,30 @@
     
 }
 
+- (void)registerDefaults
+{
+    //printf("xixi");
+    NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [NSNumber numberWithInt:-1], @"ChecklistIndex",
+                                [NSNumber numberWithBool:YES], @"FirstTime",
+                                nil];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:dictionary];
+}
 
+- (int)indexOfSelectedChecklist
+{
+    return [[NSUserDefaults standardUserDefaults] integerForKey:@"ChecklistIndex"];
+}
 
+- (void)setIndexOfSelectedChecklist:(int)index
+{
+    [[NSUserDefaults standardUserDefaults] setInteger:index forKey:@"ChecklistIndex"];
+}
+
+- (void)sortChecklists
+{
+    [self.lists sortUsingSelector:@selector(compare:)];
+}
 
 @end
 

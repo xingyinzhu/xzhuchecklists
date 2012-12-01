@@ -34,5 +34,18 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>CFBundleIconFiles</key>
+	<array>
+		<string>icon.png</string>
+		<string>icon@2x.png</string>
+		<string>icon-72.png</string>
+		<string>icon-72@2x.png</string>
+		<string>icon-Small.png</string>
+		<string>icon-Small@2x.png</string>
+		<string>icon-Small-50.png</string>
+		<string>icon-Small-50@2x.png</string>
+	</array>
+	<key>UIPrerenderedIcon</key>
+	<true/>
 </dict>
 </plist>
