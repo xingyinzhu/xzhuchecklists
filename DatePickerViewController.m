@@ -13,6 +13,52 @@
 @end
 
 @implementation DatePickerViewController
+{
+    UILabel *dateLabel;
+}
+
+@synthesize datePicker;
+@synthesize delegate;
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;
+}
+
+
+- (void)updateDateLabel
+{
+    NSLog(@"hahahaha");
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterLongStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    dateLabel.text = [formatter stringFromDate:self.date];
+    
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DateCell"];
+    
+    dateLabel = (UILabel *)[cell viewWithTag:1000];
+    [self updateDateLabel];
+    
+    return cell;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self.datePicker setDate:self.date animated:YES];
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,6 +79,29 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+- (IBAction)cancel
+{
+    [self.delegate datePickerDidCancel:self];
+}
+
+- (IBAction)dateChanged
+{
+    self.date = [self.datePicker date];
+    [self updateDateLabel];
+}
+
+
+- (IBAction)done
+{
+    [self.delegate datePicker:self didPickDate:self.date];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 77;
 }
 
 @end

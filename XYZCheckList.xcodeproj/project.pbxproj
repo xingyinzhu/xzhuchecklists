@@ -20,6 +20,7 @@
 		BE3C65461665DF3400284CA3 /* ChecklistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3C65451665DF3400284CA3 /* ChecklistViewController.m */; };
 		BE3C654E1666125F00284CA3 /* ChecklistItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3C654D1666125F00284CA3 /* ChecklistItem.m */; };
 		BE3C655116662CFD00284CA3 /* ItemDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3C655016662CFD00284CA3 /* ItemDetailViewController.m */; };
+		BE4B5B02166B9B54008CCDD9 /* DatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4B5B01166B9B54008CCDD9 /* DatePickerViewController.m */; };
 		BE8949D51668DDBE00B81361 /* AllListsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8949D41668DDBE00B81361 /* AllListsViewController.m */; };
 		BE8949D91668E3A100B81361 /* Checklist.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8949D81668E3A100B81361 /* Checklist.m */; };
 		BE8949DC1668E8AB00B81361 /* ListDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8949DB1668E8AB00B81361 /* ListDetailViewController.m */; };
@@ -79,6 +80,8 @@
 		BE3C654D1666125F00284CA3 /* ChecklistItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChecklistItem.m; sourceTree = "<group>"; };
 		BE3C654F16662CFD00284CA3 /* ItemDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemDetailViewController.h; sourceTree = "<group>"; };
 		BE3C655016662CFD00284CA3 /* ItemDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemDetailViewController.m; sourceTree = "<group>"; };
+		BE4B5B00166B9B54008CCDD9 /* DatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DatePickerViewController.h; path = ../DatePickerViewController.h; sourceTree = "<group>"; };
+		BE4B5B01166B9B54008CCDD9 /* DatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DatePickerViewController.m; path = ../DatePickerViewController.m; sourceTree = "<group>"; };
 		BE8949D31668DDBE00B81361 /* AllListsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllListsViewController.h; sourceTree = "<group>"; };
 		BE8949D41668DDBE00B81361 /* AllListsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllListsViewController.m; sourceTree = "<group>"; };
 		BE8949D71668E3A100B81361 /* Checklist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Checklist.h; sourceTree = "<group>"; };
@@ -188,6 +191,8 @@
 				BEF03FAB166A05080030C87D /* DataModel.m */,
 				BEF03FD7166A44D40030C87D /* IconPickerViewController.h */,
 				BEF03FD8166A44D50030C87D /* IconPickerViewController.m */,
+				BE4B5B00166B9B54008CCDD9 /* DatePickerViewController.h */,
+				BE4B5B01166B9B54008CCDD9 /* DatePickerViewController.m */,
 				BE3C65301665DF3400284CA3 /* Supporting Files */,
 			);
 			path = XYZCheckList;
@@ -366,6 +371,7 @@
 				BE8949DC1668E8AB00B81361 /* ListDetailViewController.m in Sources */,
 				BEF03FAC166A05080030C87D /* DataModel.m in Sources */,
 				BEF03FD9166A44D50030C87D /* IconPickerViewController.m in Sources */,
+				BE4B5B02166B9B54008CCDD9 /* DatePickerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
