@@ -67,18 +67,19 @@
     
     [self configureCheckmarkForCell:cell withChecklistItem:item];
     
-    //[self saveChecklistItems];
-    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    //[self performSegueWithIdentifier:@"EditItem" sender:item];
     
 }
 
 - (void)configureTextForCell:(UITableViewCell *)cell withChecklistItem:
     (ChecklistItem *)item
 {
+    
     UILabel *label = (UILabel *)[cell viewWithTag:1000];
-    label.text = item.text;
+    //label.text = item.text;
+    label.text = [NSString stringWithFormat:@"%@",item.text];
 }
 
 
@@ -101,7 +102,6 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.checklist.items removeObjectAtIndex:indexPath.row];
-    //[self saveChecklistItems];
     
     NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
     [tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -118,8 +118,6 @@
     NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
     [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
     
-    //[self saveChecklistItems];
-    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -134,8 +132,7 @@
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     [self configureTextForCell:cell withChecklistItem:item];
-    
-    //[self saveChecklistItems];
+
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -151,17 +148,21 @@
     {
         UINavigationController *navigationController = segue.destinationViewController;
         ItemDetailViewController *controller = (ItemDetailViewController *)navigationController.topViewController;
+        
         controller.delegate = self;
         controller.itemToEdit = sender;
-                
     }
 }
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
+    //NSLog(@"XYZHUIAMHEERE!");
     ChecklistItem *item = [self.checklist.items objectAtIndex:indexPath.row];
+    //NSLog(@"%@",item.text);
     [self performSegueWithIdentifier:@"EditItem" sender:item];
 }
+
+
 
 
 @end

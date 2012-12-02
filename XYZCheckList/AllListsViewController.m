@@ -54,17 +54,6 @@
     }
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -115,31 +104,6 @@
     
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"ShowChecklist"])
@@ -158,7 +122,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //[[NSUserDefaults standardUserDefaults] setInteger:indexPath.row forKey:@"ChecklistIndex"];
     [self.dataModel setIndexOfSelectedChecklist:indexPath.row];
     
     Checklist *checklist = [self.dataModel.lists objectAtIndex:indexPath.row];
@@ -168,14 +131,10 @@
 - (void)listdetailViewController:(ListDetailViewController *)controller didFinishAddingChecklist:(Checklist *)checklist
 {
     [self.dataModel.lists addObject:checklist];
-    //[self.dataModel sortChecklists];
     [self.dataModel sortChecklists];
-    //[self.dataModel printhaha];
     [self.tableView reloadData];
 
     [self dismissViewControllerAnimated:YES completion:nil];
-
-
 }
 
 - (void)listdetailViewController:(ListDetailViewController *)controller didFinishEditingChecklist:(Checklist *)checklist

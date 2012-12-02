@@ -18,4 +18,7 @@
 
 - (void)sortChecklists;
 
+
++ (int)nextChecklistItemId;
+
 @end

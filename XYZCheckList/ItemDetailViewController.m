@@ -9,23 +9,19 @@
 #import "ItemDetailViewController.h"
 #import "ChecklistItem.h"
 
+
 @interface ItemDetailViewController ()
 
 @end
 
 @implementation ItemDetailViewController
+{
+    NSDate *dueDate;
+}
 
 @synthesize delegate;
 @synthesize itemToEdit;
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -33,12 +29,31 @@
     if (self.itemToEdit != nil)
     {
         self.title = @"Edit Item";
-        NSLog(@"the string is %@",self.itemToEdit.text);
         self.textField.text = self.itemToEdit.text;
         self.doneBarButton.enabled = YES;
+        self.switchControl.on = self.itemToEdit.shouldRemind;
+        dueDate = self.itemToEdit.dueDate;
     }
+    else
+    {
+        self.switchControl.on = NO;
+        dueDate = [NSDate date];
+    }
+    
+    
+    [self updateDueDateLabel];
+    
+    
 }
 
+
+- (void)updateDueDateLabel
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    self.dueDateLabel.text = [formatter stringFromDate:dueDate];
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -61,19 +76,33 @@
         ChecklistItem *item = [[ChecklistItem alloc]init];
         item.text = self.textField.text;
         item.checked = NO;
-    
+        item.shouldRemind = self.switchControl.on;
+        item.dueDate = dueDate;
+        [item scheduleNotification];
+        
         [self.delegate itemDetailViewController:self didFinishAddingItem:item];
     }
     else
     {
         self.itemToEdit.text = self.textField.text;
+        self.itemToEdit.shouldRemind = self.switchControl.on;
+        self.itemToEdit.dueDate = dueDate;
+        [self.itemToEdit scheduleNotification];
+        
         [self.delegate itemDetailViewController:self didFinishEditingItem:self.itemToEdit];
     }
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return nil;
+    if (indexPath.row == 2)
+    {
+        return indexPath;
+    }
+    else
+    {
+        return nil;
+    }
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
@@ -94,5 +123,30 @@
     return YES;
     
 }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"PickDate"])
+    {
+        DatePickerViewController *controller = segue.destinationViewController;
+        controller.delegate = self;
+        controller.date = dueDate;
+    }
+}
+
+- (void)datePicker:(DatePickerViewController *)picker didPickDate:(NSDate *)date
+{
+    dueDate = date;
+    [self updateDueDateLabel];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)datePickerDidCancel:(DatePickerViewController *)picker
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+
+}
+
+
 
 @end

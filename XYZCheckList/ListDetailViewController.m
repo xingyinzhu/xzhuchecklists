@@ -101,12 +101,14 @@
     }
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+- (BOOL)textField:(UITextField *)theTextField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    NSString *newText = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    NSString *newText = [theTextField.text stringByReplacingCharactersInRange:range withString:string];
     self.doneBarButton.enabled = ([newText length] > 0);
     return YES;
 }
+
+
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -117,6 +119,7 @@
     }
 
 }
+
 
 - (void)iconPicker:(IconPickerViewController *)picker didPickIcon:(NSString *)theIconName
 {
