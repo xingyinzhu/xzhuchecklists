@@ -16,36 +16,88 @@
 
 @implementation ItemDetailViewController
 {
+    NSString *text;
+    BOOL shouldRemind;
     NSDate *dueDate;
 }
 
 @synthesize delegate;
 @synthesize itemToEdit;
 
+-(id)initWithCoder:(NSCoder *)aDecoder
+{
+    if ((self = [super initWithCoder:aDecoder]))
+    {
+        text = @"";
+        shouldRemind = NO;
+        dueDate = [NSDate date];
+    }
+    return self;
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    
+    if ([self isViewLoaded] && self.view.window == nil)
+    {
+        self.view = nil;
+    }
+    
+    if (![self isViewLoaded])
+    {
+        self.textField = nil;
+        self.doneBarButton = nil;
+        self.switchControl = nil;
+        self.dueDateLabel  = nil;
+    }
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     if (self.itemToEdit != nil)
     {
+        /*
         self.title = @"Edit Item";
         self.textField.text = self.itemToEdit.text;
         self.doneBarButton.enabled = YES;
         self.switchControl.on = self.itemToEdit.shouldRemind;
         dueDate = self.itemToEdit.dueDate;
+        */
+        self.title = @"Edit Item";
     }
+    
+    self.textField.text = text;
+    self.switchControl.on = shouldRemind;
+    
+    
+    /*
     else
     {
         self.switchControl.on = NO;
         dueDate = [NSDate date];
     }
-    
+    */
+    [self updateDoneBarButton];
     
     [self updateDueDateLabel];
     
     
 }
 
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    text = textField.text;
+    [self updateDoneBarButton];
+}
+
+
+- (void)updateDoneBarButton
+{
+    self.doneBarButton.enabled = ([text length] > 0);
+}
 
 - (void)updateDueDateLabel
 {
@@ -107,9 +159,11 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    NSString *newText = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    text = [textField.text stringByReplacingCharactersInRange:range withString:string];
     
-    self.doneBarButton.enabled = ([newText length] > 0);
+    [self updateDoneBarButton];
+    
+    //self.doneBarButton.enabled = ([newText length] > 0);
     /*
     if ([newText length] > 0)
     {
@@ -123,6 +177,19 @@
     return YES;
     
 }
+
+- (void)setItemToEdit:(ChecklistItem *)newItem
+{
+    if (itemToEdit != newItem)
+    {
+        itemToEdit = newItem;
+        text = itemToEdit.text;
+        shouldRemind = itemToEdit.shouldRemind;
+        dueDate = itemToEdit.dueDate;
+    }
+}
+
+
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -145,6 +212,11 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 
+}
+
+- (IBAction)switchChanged:(UISwitch *)sender
+{
+    shouldRemind = sender.on;
 }
 
 

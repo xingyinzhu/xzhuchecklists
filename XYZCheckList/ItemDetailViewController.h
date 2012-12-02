@@ -27,6 +27,7 @@
 
 - (IBAction)cancel;
 - (IBAction)done;
+- (IBAction)switchChanged:(UISwitch *)sender;
 
 @property (strong, nonatomic) IBOutlet UITextField *textField;
 
